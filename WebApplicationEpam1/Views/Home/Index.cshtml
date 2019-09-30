@@ -1,0 +1,52 @@
+﻿@model WebApplicationEpam1.ArticlesList
+@using LibraryDB
+
+@{
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+}
+
+<h1 class="blog-headline">Articles about healthy diet</h1>
+@for (int i = 0; i < Model.List.Count; i++)
+{
+    <div class="article-block">
+        <h2>@Model.List[i].Name</h2>
+        <p class="container">@Model.List[i].Text</p>
+        @Html.ActionLink("View more", "Article", new { id = @Model.List[i].Id })
+    </div>
+
+    @* Don't put line after last article *@
+    if (i == Model.List.Count - 1)
+    {
+        <br />
+        break;
+    }
+    <hr class="article-end-line" />
+    <br />
+}
+
+@section Voting
+{
+    <div class="voting-block">
+        @if (ViewBag.CookieValue)
+        {
+            <h2>Thanks for your vote</h2>
+        }
+        else
+        {
+            <h3>Estimate our web page.</h3>
+            using (Html.BeginForm("Index", "home", FormMethod.Post))
+            {
+                @Html.RadioButton("voting", "good", true)
+                <span class="radio-question">good</span>
+                <br />
+                @Html.RadioButton("voting", "normal")
+                <span class="radio-question">normal</span>
+                <br />
+                @Html.RadioButton("voting", "bad")
+                <span class="radio-question">bad</span>
+                <br />
+                <input id="send-voting" type="submit" name="Button" value="Send" />
+            }
+        }
+    </div>
+}

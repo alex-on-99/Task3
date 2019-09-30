@@ -1,0 +1,16 @@
+﻿@using LibraryDB
+@model LibraryDB.Article
+
+@{
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+}
+    <div class="article-block">
+        <h1>@Model.Name</h1>
+        <span>@Model.Text</span>
+        <br /><br />
+        <div>
+            @Model.Date.ToString("MM/dd/yyyy hh:mm")
+        </div>
+        <hr />
+        <span class="tags-text">@ViewData["Tags"].ToString()</span>
+    </div>
